@@ -1,45 +1,48 @@
-// import * as chai from "chai";
-// import axios from "axios";
-import { config } from "dotenv";
+import { expect } from "chai";
 import lambdaTester from "lambda-tester";
-import * as lambda from '../handler';
+import * as lambda from "../handler";
+import { responseHeaders } from "../src/domain/constants/headers.constant";
 
-config();
+const mockData = {
+  headers: responseHeaders,
+  httpMethod: "POST",
+  body: { username: "xyz", password: "xyz" },
+};
 
-// const { expect } = chai;
+const mockData1 = {
+  headers: responseHeaders,
+  httpMethod: "GET",
+  body: { username: "xyz", password: "xyz" },
+};
 
-const mockData = { username: "xyz", password: "xyz" };
+describe("EVENT TESTS", () => {
+  it("should return a successful result: POST", async () => {
+    await lambdaTester(lambda.createEvent)
+      .event(mockData)
+      .expectResult((result) => {
+        expect(result.statusCode).to.eql(200);
 
+        const body = JSON.parse(result.body);
 
-describe("CREATE EVENT TESTS", () => {
-//   let response, statusCode: number;
-
-  before(async () => {
-    try {
-      const res = await lambdaTester(lambda.createEvent).event(mockData);
-    //   statusCode = 200;
-    //   response = res.data;
-      console.log(res, ">>>>>>>>>>>>")
-    //   console.log(statusCode)
-
-      return res;
-    } catch (error: unknown) {
-    //   statusCode = error.response.statusCode;
-    //   response = error.response.body;
-      return error;
-    }
+        expect(body.response).to.eql(
+          "Welcome to terraform-lambda API, here are the details of your request:"
+        );
+        expect(body.method).to.eql("POST");
+      });
   });
 
-  it("should return a 200 status code", (done) => {
-    // expect(statusCode).to.eql(200);
-    
-    done();
-  });
+  it("should return a successful result: GET", async () => {
+    await lambdaTester(lambda.getEvent)
+      .event(mockData1)
+      .expectResult((result) => {
+        expect(result.statusCode).to.eql(200);
 
-//   it("should return success on hitting event post api", (done) => {
-//     expect(response.response).to.eql(
-//       "Welcome to terraform-lambda API, here are the details of your request:"
-//     );
-//     done();
-//   });
+        const body = JSON.parse(result.body);
+
+        expect(body.response).to.eql(
+          "Welcome to terraform-lambda API, here are the details of your request:"
+        );
+        expect(body.method).to.eql("GET");
+      });
+  });
 });

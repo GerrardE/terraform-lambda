@@ -5,13 +5,14 @@ import { createResponse } from "./factory/response.factory";
 export const createEvent = async (
   event: APIGatewayProxyEvent = {}
 ): Promise<APIGatewayProxyResult> => {
+  
   return createResponse({
     code: statusCode.ok,
     headers: event.headers,
     body: {
       response:
         "Welcome to terraform-lambda API, here are the details of your request:",
-      headers: event.headers["Content-Type"],
+      headers: event.headers,
       method: event.httpMethod,
       body: event.body,
     },

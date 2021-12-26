@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import lambdaTester from "lambda-tester";
-import * as lambda from "../handler";
+import * as lambda from "../src";
 import { responseHeaders } from "../src/domain/constants/headers.constant";
 
 const mockData = {

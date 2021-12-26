@@ -27,9 +27,13 @@
     {
         "Effect": "Allow",
         "Action": [
-            "codestar-connections:PassConnection"
+            "codestar-connections:PassConnection",
+            "codestar-connections:UseConnection"
         ],
-        "Resource": "${codestar_connection_arn}/*",
+        "Resource": [
+          "${codestar_connection_arn}",
+          "${codestar_connection_arn}/*"
+        ],
         "Condition": {"ForAllValues:StringEquals": {"codestar-connections:PassedToService": "codepipeline.amazonaws.com"}}
     }
   ]

@@ -27,7 +27,7 @@ export const getEvent = async (
     body: {
       response:
         "Welcome to terraform-lambda API, here are the details of your request:",
-      headers: event.headers["Content-Type"],
+      headers: event.headers,
       method: event.httpMethod,
       body: event.body,
     },

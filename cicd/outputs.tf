@@ -1,11 +1,11 @@
-output "function_name" {
+output "function_1_url" {
   description = "Name of the Lambda function."
 
-  value = aws_lambda_function.fn_1.function_name
+  value = "${aws_apigatewayv2_stage.lambda_gw_stg.invoke_url}/${aws_lambda_function.fn_1.function_name}"
 }
 
-output "base_url" {
-  description = "Base URL for API Gateway stage."
+output "function_2_url" {
+  description = "Name of the Lambda function."
 
-  value = aws_apigatewayv2_stage.lambda_gw_stg.invoke_url
+  value = "${aws_apigatewayv2_stage.lambda_gw_stg.invoke_url}/${aws_lambda_function.fn_2.function_name}"
 }

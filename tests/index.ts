@@ -22,7 +22,7 @@ describe("EVENT TESTS", () => {
       .expectResult((result) => {
         expect(result.statusCode).to.eql(200);
 
-        const body = JSON.parse(result.body);
+        const body = result.body;
 
         expect(body.response).to.eql(
           "Welcome to terraform-lambda API, here are the details of your request:"
@@ -37,7 +37,7 @@ describe("EVENT TESTS", () => {
       .expectResult((result) => {
         expect(result.statusCode).to.eql(200);
 
-        const body = JSON.parse(result.body);
+        const body = result.body;
 
         expect(body.response).to.eql(
           "Welcome to terraform-lambda API, here are the details of your request:"

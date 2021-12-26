@@ -1,15 +1,27 @@
 # -----------------------------------------------------------------------------
+# Variables: Cloud Provider
+# -----------------------------------------------------------------------------
+
+variable "provider_region" {
+  description = "AWS region"
+  default = "us-east-1"
+}
+
+variable "provider_access_key" {
+  description = "AWS access key"
+}
+
+variable "provider_secret_key" {
+  description = "AWS secret key"
+}
+
+# -----------------------------------------------------------------------------
 # Variables: Main
 # -----------------------------------------------------------------------------
 
 variable "namespace" {
   description = "AWS resource namespace/prefix"
-  default = "terraform-lambda"
-}
-
-variable "region" {
-  description = "AWS region"
-  default = "us-east-1"
+  default = "prod"
 }
 
 variable "resource_tag_name" {
@@ -56,27 +68,25 @@ variable "poll_source_changes" {
 # -----------------------------------------------------------------------------
 # Variables: Github
 # -----------------------------------------------------------------------------
-variable "github_oauth_token" {
+variable "github_token" {
   type        = string
-  description = "Github OAuth token"
+  description = "GitHub API or personal access token - see https://github.com/blog/1509-personal-api-tokens"
 }
 
 variable "github_user" {
   type        = string
-  description = "Github username"
+  default     = "GerrardE"
+  description = "GitHub username or organization is required"
 }
 
 variable "github_repo" {
   type        = string
-  description = "Github repository name"
+  default     = "terraform-lambda"
+  description = "GitHub source repository - must contain a Dockerfile and buildspec.yml in the base"
 }
 
 variable "github_branch" {
   type        = string
-  description = "Github branch name"
   default     = "main"
+  description = "GitHub git repository branch - change triggers a new build"
 }
-
-# -----------------------------------------------------------------------------
-# Variables: CloudWatch
-# -----------------------------------------------------------------------------

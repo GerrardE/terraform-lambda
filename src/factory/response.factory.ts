@@ -9,6 +9,6 @@ export const createResponse = ({
   return {
     statusCode: code,
     headers: headers,
-    body,
+    body: JSON.stringify(body),
   };
 };

@@ -90,6 +90,7 @@ data "template_file" "codepipeline-policy-template" {
     vars = {
         s3_bucket_arn = aws_s3_bucket.artifact_store.arn
         codebuild_project_arn = aws_codebuild_project.terraform_lambda_cb_proj.arn
+        codestar_connection_arn = aws_codestarconnections_connection.connect_repo.arn
     }
 }
 

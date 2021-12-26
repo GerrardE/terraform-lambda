@@ -23,6 +23,14 @@
           "codebuild:StartBuild"
         ],
       "Resource": "${codebuild_project_arn}"
+    },
+    {
+        "Effect": "Allow",
+        "Action": [
+            "codestar-connections:PassConnection"
+        ],
+        "Resource": "${codestar_connection_arn}/*",
+        "Condition": {"ForAllValues:StringEquals": {"codestar-connections:PassedToService": "codepipeline.amazonaws.com"}}
     }
   ]
 }

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm run clean && tsc && cp package.json build/package.json && cd build && zip -r terraform-lambda.zip . && cd ..",
+    "build": "npm run clean && tsc && cp ./package.json ./build/package.json && cd ./build && zip -r terraform-lambda.zip . && cd ..",
     "deploy": "npm i && npm run build && chmod +x ./deploy.sh && ./deploy.sh",
     "test": "npx mocha \"tests/**/**/*.ts\" --require ts-node/register",
     "clean": "rm -rf build",

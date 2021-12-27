@@ -4,9 +4,9 @@
     {
       "Effect": "Allow",
       "Principal": {
-        "Service": "codebuild.amazonaws.com"
+        "Service": "${service}"
       },
-      "Action": "sts:AssumeRole"
+      "Action": "${action}"
     }
   ]
 }

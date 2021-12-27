@@ -38,9 +38,13 @@ jobs: # a collection of steps
             npm run deploy
 
 workflows:
-  test_and_deploy:
+  test:
     jobs:
       - test
       - deploy:
           requires:
           - test
+          filters:
+            branches:
+              only: 
+                - main

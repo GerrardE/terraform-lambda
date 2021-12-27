@@ -11,7 +11,7 @@ export const createEvent = async (
     headers: event.headers,
     body: {
       response:
-        "Welcome to terraform-lambda API, here are the details of your request:",
+        "Welcome to the terraform-lambda API, here are the details of your request:",
       headers: event.headers,
       method: event.httpMethod,
       body: event.body,
@@ -26,7 +26,7 @@ export const getEvent = async (
     code: statusCode.ok,
     body: {
       response:
-        "Welcome to terraform-lambda API, here are the details of your request:",
+        "Welcome to the terraform-lambda API, here are the details of your request:",
       headers: event.headers,
       method: event.httpMethod,
       body: event.body,

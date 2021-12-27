@@ -1,4 +1,7 @@
 # terraform-lambda
+
+[![CircleCI](https://circleci.com/gh/GerrardE/terraform-lambda/tree/main.svg?style=svg)](https://circleci.com/gh/GerrardE/terraform-lambda/tree/main)
+
 - create a source project for github repo source
 - create an s3 bucket for the lambda function
 - create a codebuild project that zips the lambda and sends to the s3 bucket

@@ -1,11 +1,11 @@
 {
   "name": "terraform-lambda",
   "version": "1.0.0",
-  "description": "",
+  "description": "IaC for a simple web application that runs on AWS Lambda.",
   "main": "index.js",
   "scripts": {
-    "build": "npm run clean && tsc && cp package.json build/package.json && cd build && zip -r terraform-lambda.zip * && cd ..",
-    "deploy": "npm i && npm run build && ls -a build && chmod +x ./deploy.sh && ./deploy.sh",
+    "build": "npm run clean && tsc && cp ./package.json ./build/package.json && cd ./build && zip -r terraform-lambda.zip . && cd ..",
+    "deploy": "npm i && npm run build && chmod +x ./deploy.sh && ./deploy.sh",
     "test": "npx mocha \"tests/**/**/*.ts\" --require ts-node/register",
     "clean": "rm -rf build",
     "tsc": "tsc"
@@ -16,7 +16,6 @@
     "@types/node": "^14.14.37",
     "aws-lambda": "^1.0.7",
     "chai": "^4.3.4",
-    "concurrently": "^6.0.0",
     "lambda-tester": "^4.0.1",
     "mocha": "^9.1.3",
     "prettier": "^2.2.1",

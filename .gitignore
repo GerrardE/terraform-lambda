@@ -1,6 +1,9 @@
 node_modules
 .env
-build
+build/**/*.js*
+build/domain
+build/factory
+build/logic
 cicd/*.tfstate*
 cicd/.terraform.lock.hcl
 cicd/.terraform

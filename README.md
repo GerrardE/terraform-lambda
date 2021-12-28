@@ -61,6 +61,9 @@ Provision the necessary services needed for running the application locally:
    ```
    curl --header "Content-Type: application/json" --data '{"username":"xyz","password":"xyz"}' <function_2_url>
    ```
+   
+   POST endpoint - `https://f3vy3p7adf.execute-api.us-east-1.amazonaws.com/prod-terraform-lambda/createEvent`
+   GET endpoint - `https://f3vy3p7adf.execute-api.us-east-1.amazonaws.com/prod-terraform-lambda/getEvent`
 
    Or using Postman.
 

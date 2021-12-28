@@ -61,7 +61,7 @@ module "fn_2" {
 
   api_id = aws_apigatewayv2_api.lambda_gw.id
 
-  route_key = "GET /createEvent"
+  route_key = "GET /getEvent"
 
   source_arn = "${aws_apigatewayv2_api.lambda_gw.execution_arn}/*/*"
 }

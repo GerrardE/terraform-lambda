@@ -61,11 +61,17 @@ Provision the necessary services needed for running the application locally:
    ```
    curl --header "Content-Type: application/json" --data '{"username":"xyz","password":"xyz"}' <function_2_url>
    ```
-   
+
+   App Endpoints:
    POST endpoint - `https://f3vy3p7adf.execute-api.us-east-1.amazonaws.com/prod-terraform-lambda/createEvent`
    GET endpoint - `https://f3vy3p7adf.execute-api.us-east-1.amazonaws.com/prod-terraform-lambda/getEvent`
 
    Or using Postman.
+1. To clean up the stack:
+      Run the following commands 
+      - `terraform plan -destroy` would let you know resources about to be cleaned and if you are okay, proceed to clean up with the following command
+      - `terraform destroy -var "provider_access_key=<awsaccesskeyidhere>" -var "provider_secret_key=<awssecretaccesskeyhere>"` and then when prompted to enter 
+       a value, type in `yes` to clean up the resources on aws.
 
 #### CICD
 

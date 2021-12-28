@@ -27,3 +27,21 @@ variable "dependency" {
   description = "AWS lambda depends on for creation"
   default     = ""
 }
+
+variable "api_id" {
+  description = "Api Id"
+}
+
+variable "route_key" {
+  description = "route key for the route being created"
+}
+
+variable "apigw_statement_id" {
+  type = string
+  default = "AllowExecutionFromAPIGateway"
+  description = "Api gateway statement id"
+}
+
+variable "source_arn" {
+  description = "Source arn for the apigatewayv2 api gateway"
+}

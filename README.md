@@ -62,6 +62,8 @@ Provision the necessary services needed for running the application locally:
    curl --header "Content-Type: application/json" --data '{"username":"xyz","password":"xyz"}' <function_2_url>
    ```
 
+   Or using Postman.
+
 #### CICD
 
 ![Cicd](./docs/terraform-lambda-cicd.png)
@@ -99,6 +101,17 @@ Provision the necessary services needed for running the application locally:
 This project contains some tests. Follow these steps to run the tests locally.
 
 1. Run `yarn test` in the root directory
+
+## Cost Implication
+
+- AWS Lambda free tier, 1 million always free requests monthly
+- AWS API Gateway free tier, 1 million free api calls monthly for 1 year
+- 10 always free AWS CloudWatch custom metrics, here we have just 3 custom metrics
+- 5 GB AWS S3 bucket free for 1 year
+- CircleCI provides 6000 build minutes/month for free always
+
+In conclusion, it would not cost anything to get this simple app running for a whole year, as long as we remain within free tier limits.
+For us to scale, we need to consider cost implications of moving to the next tier for each of the service considered.
 
 ## References
 

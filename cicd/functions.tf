@@ -37,13 +37,14 @@ module "fn_1" {
   iam_role = aws_iam_role.lambda_exec.arn
 
   dependency = aws_s3_bucket_object.artifact
+
+  api_id = aws_apigatewayv2_api.lambda_gw.id
+
+  route_key = "POST /createEvent"
+
+  source_arn = "${aws_apigatewayv2_api.lambda_gw.execution_arn}/*/*"
 }
 
-module "fn_1_logs" {
-  source = "./modules/cloudwatch-log-group"
-
-  log_name = "/aws/lambda/${module.fn_1.function_name}"
-}
 
 module "fn_2" {
   source        = "./modules/lambda-function"
@@ -57,12 +58,12 @@ module "fn_2" {
   iam_role = aws_iam_role.lambda_exec.arn
 
   dependency = aws_s3_bucket_object.artifact
-}
 
-module "fn_2_logs" {
-  source = "./modules/cloudwatch-log-group"
+  api_id = aws_apigatewayv2_api.lambda_gw.id
 
-  log_name = "/aws/lambda/${module.fn_2.function_name}"
+  route_key = "GET /createEvent"
+
+  source_arn = "${aws_apigatewayv2_api.lambda_gw.execution_arn}/*/*"
 }
 
 # -----------------------------------------------------------------------------
@@ -89,65 +90,18 @@ resource "aws_apigatewayv2_stage" "lambda_gw_stg" {
   access_log_settings {
     destination_arn = module.api_gw_lg.arn
 
-    format = file("${path.module}/policies/access-log.json")
+    format = jsonencode({
+      requestId               = "$context.requestId"
+      sourceIp                = "$context.identity.sourceIp"
+      requestTime             = "$context.requestTime"
+      protocol                = "$context.protocol"
+      httpMethod              = "$context.httpMethod"
+      resourcePath            = "$context.resourcePath"
+      routeKey                = "$context.routeKey"
+      status                  = "$context.status"
+      responseLength          = "$context.responseLength"
+      integrationErrorMessage = "$context.integrationErrorMessage"
+      }
+    )
   }
-}
-
-# -----------------------------------------------------------------------------
-# Resource: Api Gateway Integrations
-# -----------------------------------------------------------------------------
-module "fn_1_integrtn" {
-  source = "./modules/apigatewayv2-integration"
-
-  api_id = aws_apigatewayv2_api.lambda_gw.id
-
-  integration_uri = module.fn_1.invoke_arn
-}
-
-module "fn_2_integrtn" {
-  source = "./modules/apigatewayv2-integration"
-
-  api_id = aws_apigatewayv2_api.lambda_gw.id
-
-  integration_uri = module.fn_2.invoke_arn
-}
-
-# -----------------------------------------------------------------------------
-# Resource: Api Gateway Integration Routes
-# -----------------------------------------------------------------------------
-
-resource "aws_apigatewayv2_route" "fn_1_rte" {
-  api_id = aws_apigatewayv2_api.lambda_gw.id
-
-  route_key = "POST /createEvent"
-  target    = "integrations/${module.fn_1_integrtn.id}"
-}
-
-resource "aws_apigatewayv2_route" "fn_2_rte" {
-  api_id = aws_apigatewayv2_api.lambda_gw.id
-
-  route_key = "GET /getEvent"
-  target    = "integrations/${module.fn_2_integrtn.id}"
-}
-
-# -----------------------------------------------------------------------------
-# Resource: Api Exec Permissions
-# -----------------------------------------------------------------------------
-
-module "api_gw_perm_1" {
-  source  = "Cloud-42/lambda-permission/aws"
-  version = "2.0.0"
-
-  function_name = module.fn_1.function_name
-  statement_id  = var.apigw_statement_id
-  source_arn    = "${aws_apigatewayv2_api.lambda_gw.execution_arn}/*/*"
-}
-
-module "api_gw_perm_2" {
-  source  = "Cloud-42/lambda-permission/aws"
-  version = "2.0.0"
-
-  function_name = module.fn_2.function_name
-  statement_id  = var.apigw_statement_id
-  source_arn    = "${aws_apigatewayv2_api.lambda_gw.execution_arn}/*/*"
 }

@@ -4,6 +4,6 @@ build/**/*.js*
 build/domain
 build/factory
 build/logic
-cicd/*.tfstate*
-cicd/.terraform.lock.hcl
-cicd/.terraform
+terraform/*.tfstate*
+terraform/.terraform.lock.hcl
+terraform/.terraform

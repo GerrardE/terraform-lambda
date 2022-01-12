@@ -18,18 +18,3 @@ export const createEvent = async (
     },
   });
 };
-
-export const getEvent = async (
-  event: APIGatewayProxyEvent = {}
-): Promise<APIGatewayProxyResult> => {
-  return createResponse({
-    code: statusCode.ok,
-    body: {
-      response:
-        "Welcome to the terraform-lambda API, here are the details of your request:",
-      headers: event.headers,
-      method: event.httpMethod,
-      body: event.body,
-    },
-  });
-};

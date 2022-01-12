@@ -61,8 +61,8 @@ Provision the necessary services needed for running the application locally:
    ```
 
    App Endpoints:
-   POST endpoint - `https://f3vy3p7adf.execute-api.us-east-1.amazonaws.com/prod-terraform-lambda/createEvent`
-   GET endpoint - `https://f3vy3p7adf.execute-api.us-east-1.amazonaws.com/prod-terraform-lambda/getEvent`
+   POST endpoint - `https://lpzv90eo0m.execute-api.us-east-1.amazonaws.com/prod-terraform-lambda/createEvent`
+   GET endpoint - `https://lpzv90eo0m.execute-api.us-east-1.amazonaws.com/prod-terraform-lambda/getEvent`
 
    Or using Postman.
 1. To clean up the stack:

@@ -1,1 +1,1 @@
-export { createEvent, getEvent } from "./logic/index";
+export { createEvent } from "./logic/index";

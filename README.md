@@ -41,7 +41,7 @@ Provision the necessary services needed for running the application locally:
 1. Follow the instructions [here](https://learn.hashicorp.com/tutorials/terraform/install-cli) to install `terraform` cli on your PC
 1. Clone this repository to your PC and 
 1. Run `yarn` or `npm install` in the root folder to install dependencies
-1. Checkout into the cicd directory and run the following commands:
+1. Checkout into the `terraform` directory and run the following commands:
       - `terraform init` to initialize terraform locally
       - `terraform plan -var "provider_access_key=<awsaccesskeyidhere>" -var "provider_secret_key=<awssecretaccesskeyhere>"` to create a terraform plan
       - `terraform apply -var "provider_access_key=<awsaccesskeyidhere>" -var "provider_secret_key=<awssecretaccesskeyhere>"` and then when prompted to enter 
@@ -51,10 +51,8 @@ Provision the necessary services needed for running the application locally:
    ```
    artifact = <artifact object key>
    artifact_store = <artifact store id>
-   function_1_name = <name of the first function>
-   function_1_url = <The POST endpoint i.e function invocation url>
-   function_2_name = <name of the second function>
-   function_2_url = <The GET endpoint i.e function invocation url>
+   function_name = <name of the function>
+   function_url = <The endpoint i.e function invocation url>
    ```
 1. The endpoints from above can be hit using the following format:
 
@@ -82,7 +80,7 @@ Provision the necessary services needed for running the application locally:
       - Create an account on AWS for free [here](https://aws.amazon.com/free/)
       - Create your AWS security credentials(`access key id` & `secret access key`) [here](https://console.aws.amazon.com/iam/home?#/security_credentials)
 1. Follow the instructions at the [Terraform Cloud docs](https://learn.hashicorp.com/collections/terraform/cloud-get-started?utm_source=terraform_io): 
-      - Create the workspace: (In the `Advanced options` tab set the `Terraform Working Directory` to `cicd`)
+      - Create the workspace: (In the `Advanced options` tab set the `Terraform Working Directory` to `terraform`)
       - link the git repository from the first step and setup aws credentials as variables like so:
          ```
          provider_access_key = `<awsaccesskeyidhere>`
@@ -99,8 +97,7 @@ Provision the necessary services needed for running the application locally:
       - AWS_DEFAULT_REGION: `us-east-1`
       - AWS_REGION: `us-east-1`
       - AWS_SECRET_ACCESS_KEY: `<awssecretaccesskeyhere>`
-      - F1: `<function_1_name>`
-      - F2: `<function_2_name>`
+      - F1: `<function_name>`
       - S3_BUCKET: `<artifact store>`
       - S3_BUCKET_KEY: `<artifact object key>`
 1. Make changes in the code on the repository and watch the pipeline initialize and complete the `test_build_deploy` process.

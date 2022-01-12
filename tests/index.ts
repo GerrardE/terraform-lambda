@@ -32,7 +32,7 @@ describe("EVENT TESTS", () => {
   });
 
   it("should return a successful result: GET", async () => {
-    await lambdaTester(lambda.getEvent)
+    await lambdaTester(lambda.createEvent)
       .event(mockData1)
       .expectResult((result) => {
         expect(result.statusCode).to.eql(200);
